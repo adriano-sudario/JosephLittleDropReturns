@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://ptwv2o0uimfa"]
+
+[ext_resource type="Script" path="res://entities/debug/debug_panel.gd" id="1_vj620"]
+
+[node name="DebugPanel" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_vj620")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(400, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.862745, 0.109804, 1)
+autowrap_mode = 3
+
+[node name="TempPanelContainer" type="PanelContainer" parent="."]
+visible = false
+layout_direction = 3
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="TempPanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="TempPanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(400, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.862745, 0.109804, 1)
+horizontal_alignment = 1
+autowrap_mode = 3
