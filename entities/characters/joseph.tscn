@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cotn62tgoiko"]
+[gd_scene load_steps=4 format=3 uid="uid://cotn62tgoiko"]
 
 [ext_resource type="Texture2D" uid="uid://clh1acb3kpevm" path="res://icon.svg" id="1_7ov7u"]
+[ext_resource type="Script" path="res://entities/characters/joseph.gd" id="1_tcc2k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tl5ex"]
 size = Vector2(128, 127)
 
 [node name="Joseph" type="CharacterBody2D"]
+script = ExtResource("1_tcc2k")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_7ov7u")
 
 [node name="Collision" type="CollisionShape2D" parent="."]

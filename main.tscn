@@ -1,8 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt4w3mwmtr6hm"]
+[gd_scene load_steps=5 format=3 uid="uid://bt4w3mwmtr6hm"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_2ejye"]
-[ext_resource type="PackedScene" uid="uid://dvjqeiwd1y2xg" path="res://screens/test_level.tscn" id="2_lc03d"]
+[ext_resource type="PackedScene" uid="uid://dvjqeiwd1y2xg" path="res://screens/levels/test_level.tscn" id="2_lc03d"]
+[ext_resource type="PackedScene" uid="uid://cotn62tgoiko" path="res://entities/characters/joseph.tscn" id="3_btdjw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mb4y"]
+size = Vector2(250, 19)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ejye")
 initial_scene = ExtResource("2_lc03d")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(209, 446)
+scale = Vector2(3.24, 2.88)
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
+offset_right = 250.0
+offset_bottom = 19.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D"]
+position = Vector2(125, 9.5)
+shape = SubResource("RectangleShape2D_7mb4y")
+
+[node name="Joseph" parent="." instance=ExtResource("3_btdjw")]
+position = Vector2(294, 345)
