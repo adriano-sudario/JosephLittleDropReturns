@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed := 300.0
+@export var running_boost := 150.0
 @export var jump_force := 400.0
 @export var start_flipped := false
 @export var coyote_time := 0.15
@@ -10,6 +11,7 @@ var is_holding_jump := false
 var has_just_released_jump := false
 var is_waiting_release_to_jump := false
 var has_jump := false
+var is_running := false
 var gravity := 980.0
 var gravity_force_applied := 0.0
 var direction_input := Vector2.ZERO
@@ -72,11 +74,12 @@ func _process(_delta):
 		is_waiting_release_to_jump = false
 	
 	direction_input = get_direction_input()
+	is_running = Input.is_action_pressed("run") and direction_input.x != 0
 
 func _physics_process(delta):
 	update_gravity_force(delta)
 	update_movement()
-	#update_animation()
+	update_animation()
 
 func update_gravity_force(delta):
 	if is_on_floor():
@@ -124,20 +127,27 @@ func on_coyote_timer_timeout():
 	coyote_timer = null
 
 func update_movement():
-	velocity = Vector2(direction_input.x * speed, gravity_force_applied)
+	var speed_boost = 0
+	
+	if is_running:
+		speed_boost = running_boost
+	
+	velocity = Vector2(direction_input.x * (speed + speed_boost), gravity_force_applied)
 	move_and_slide()
 
-#func _physics_process(delta):
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-#
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = jump_force
-#
-	#var direction = Input.get_axis("ui_left", "ui_right")
-	#if direction:
-		#velocity.x = direction * speed
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, speed)
-#
-	#move_and_slide()
+func update_animation():
+	if velocity.x == 0:
+		sprite.play("idle")
+	else:
+		if velocity.y == 0:
+			if is_running:
+				sprite.play("run")
+			else:
+				sprite.play("walk")
+		
+		is_flipped = velocity.x < 0
+	
+	if velocity.y < 0:
+		sprite.play("air_up")
+	elif velocity.y > 0:
+		sprite.play("air_down")
